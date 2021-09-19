@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int main()
+{
+    string s1;
+    string s2;
+    int n,i,j,game;
+    cin >> s1 >> s2;
+    cin >> n;
+ 
+    int t[n];
+    int jn[n];
+    int res[n];
+    char ha[n];
+    char crd[n];
+ 
+    for(i=0; i<n; i++)
+        cin >> t[i] >> ha[i] >> jn[i] >> crd[i];
+ 
+    for(i=0; i<n; i++)
+    {
+        if(crd[i]=='r')
+            res[i]=1;
+        else
+        {
+            for(j=i-1; j>=0; j--)
+            {
+                if(ha[i]==ha[j] && jn[i]==jn[j])
+                    res[i]=1;
+            }
+        }
+ 
+    }
+ 
+    for(i=0; i<n; i++)
+    {
+        if(res[i]==1)
+        {
+            game=0;
+            for(j=i-1; j>=0; j--)
+            {
+                if(ha[i]==ha[j] && jn[i]==jn[j] && res[j]==1)
+                {
+                    game=1;
+                    break;
+                }
+            }
+            if(game==1)
+                continue;
+ 
+            if(ha[i]=='h')
+                cout << s1 << " ";
+            else
+                cout << s2 << " ";
+            cout << jn[i] << " " << t[i] << endl;
+        }
+    }
+}
